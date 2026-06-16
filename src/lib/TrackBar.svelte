@@ -8,7 +8,7 @@
   });
 
   $effect(() => {
-    const track = tracksState.currentTrack
+    const track = tracksState.current
     audio.htmlTag.src = track.audio
     audio.htmlTag.play()
     audio.isPlaying = true
@@ -23,33 +23,44 @@
       audio.htmlTag.pause();
     }
   };
+
+  const nextTrack = () => {
+    const index = tracksState.list.findIndex(
+      track => track.id == tracksState.current.id
+    )
+    const nextTrack = tracksState.list[index + 1]
+    
+    tracksState.current = nextTrack ?? tracksState.list[0]
+  }
 </script>
 
 <div
   class="bg-linear-to-bl from-red-50/20 to-gray-100/80 backdrop-blur flex px-8 py-4 gap-4 items-center"
 >
-  {#if tracksState.currentTrack}
+  {#if tracksState.current}
     <div class="w-14 h-14">
       <img
         onpause={() => audio.isPlaying = false}
         onplay={() => audio.isPlaying = true}
-        src={tracksState.currentTrack.album.image}
+        src={tracksState.current.album.image}
         class="w-full h-full rounded-lg object-cover"
         alt=""
       />
     </div>
     <div class="text-left -space-y-1">
-      <p class="font-semibold">{tracksState.currentTrack.title}</p>
+      <p class="font-semibold">{tracksState.current.title}</p>
       <p class="opacity-60 text-sm font-bold text-rose-600">
-        {tracksState.currentTrack.artist.name}
+        {tracksState.current.artist.name}
       </p>
     </div>
     <div class="flex-1 flex justify-end">
       <audio
         bind:this={audio.htmlTag}
         // autoplay
+        // controls
+        onended={nextTrack}
       ></audio>
-      <button onclick={handlerPlay}>
+      <button onclick={handlerPlay} class="cursor-pointer">
         {#if audio.isPlaying}
           <Icon
             icon="material-symbols:pause-rounded"
@@ -62,7 +73,7 @@
           />
         {/if}
       </button>
-      <button>
+      <button onclick={nextTrack} class="cursor-pointer">
         <Icon 
           icon="material-symbols:skip-next-rounded"
           width={32}

@@ -4,7 +4,7 @@
   let { track } = $props();
 
   const handlerClick = () => {
-    tracksState.currentTrack = track
+    tracksState.current = track
   };
 </script>
 

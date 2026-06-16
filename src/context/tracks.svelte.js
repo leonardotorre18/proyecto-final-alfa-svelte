@@ -1,12 +1,13 @@
 export const tracksState = $state({
-  currentTrack: null
+  current: null,
+  list: []
 })
 
 $effect.root(() => {
   const initialTrack = JSON.parse(localStorage.getItem('currentTrack'))
-  tracksState.currentTrack = initialTrack
+  tracksState.current = initialTrack
 
   $effect(() => {
-    localStorage.setItem('currentTrack', JSON.stringify(tracksState.currentTrack))
+    localStorage.setItem('currentTrack', JSON.stringify(tracksState.current))
   })
 })
