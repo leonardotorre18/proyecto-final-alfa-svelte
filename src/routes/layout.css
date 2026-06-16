@@ -1,1 +1,9 @@
 @import 'tailwindcss';
+
+* {
+  @apply tracking-tight
+}
+
+body {
+  @apply text-gray-950
+}
