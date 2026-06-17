@@ -11,7 +11,8 @@
   let resAlbums = axios.get("https://leonardoapi.vercel.app/api/albums");
 </script>
 
-<main class="flex h-full">
+<main class="flex flex-col md:flex-row h-full overflow-y-auto">
+
   <section class="flex-1 overflow-y-auto">
     {#await resAlbums}
       Awaiting
@@ -24,7 +25,7 @@
     {/await}
   </section>
 
-  <section class="w-lg overflow-y-auto">
+  <section class="flex-1 overflow-y-auto">
     {#await resTracks}
       <TrackListSkeleton />
     {:then resTracks}
@@ -35,4 +36,5 @@
       </div>
     {/await}
   </section>
+
 </main>
