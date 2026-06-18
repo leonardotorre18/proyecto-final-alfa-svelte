@@ -1,6 +1,8 @@
 <header>
   <nav class="px-8 py-2 flex items-center gap-6 justify-between">
-    <p class="font-bold text-lg">Alfafy</p>
+    <a href="/">
+      <p class="font-bold text-lg">Alfafy</p>
+    </a>
     <!-- <ul class="flex-1">
       <li><a href="/">Inicio</a></li>
     </ul>

@@ -1,11 +1,10 @@
 <script>
-  import { tracksState } from "$lib/context/tracks.svelte"
+  import { changeTrack, tracksState } from "$lib/context/tracks.svelte"
 
   let { track } = $props();
 
   const handlerClick = () => {
-    tracksState.current = track
-    localStorage.setItem('currentTime', 0)
+    changeTrack(track)
   };
 
   const isCurrent = $derived(tracksState.current && tracksState.current.id == track.id) 

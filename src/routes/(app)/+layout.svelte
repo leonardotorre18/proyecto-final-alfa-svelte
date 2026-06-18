@@ -5,7 +5,7 @@
     let { children } = $props();
 </script>
 
-<div class="grid grid-rows-[auto,1fr,auto] h-[100vh]">
+<div class="flex flex-col h-screen">
     <div>
         <Navbar />
         <div>
@@ -14,7 +14,7 @@
             />
         </div>
     </div>
-    <div class="max-h-full overflow-auto">
+    <div class=" overflow-y-auto flex-1">
         {@render children()}
     </div>
     <div class="sticky bottom-0 left-0">

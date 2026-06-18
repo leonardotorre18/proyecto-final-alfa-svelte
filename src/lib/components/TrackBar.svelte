@@ -11,12 +11,14 @@
 
   $effect(() => {
     const track = tracksState.current;
-    audio.htmlTag.src = track.audio;
-    const currentTime = localStorage.getItem('currentTime')
-    audio.htmlTag.currentTime = currentTime ? currentTime : 0
-    audio.htmlTag.play();
-    if (audio.htmlTag.paused) audio.isPlaying = false 
-    else audio.isPlaying = true;
+    if (track) {
+      audio.htmlTag.src = track.audio;
+      const currentTime = localStorage.getItem('currentTime')
+      audio.htmlTag.currentTime = currentTime ? currentTime : 0
+      audio.htmlTag.play();
+      if (audio.htmlTag.paused) audio.isPlaying = false 
+      else audio.isPlaying = true;
+    }
   });
 
   const handlerPlay = () => {
@@ -50,18 +52,17 @@
       } 
       else audio.progress = 0;
 
-    
     }, 1000);
     return () => clearInterval(interval);
   });
 </script>
 
 <div>
-  <div class="h-1 w-full">
-    <div class="h-full bg-rose-500 transition-all" style="width: {audio.progress}%;"></div>
+  <div class="h-1 w-full bg-linear-to-br to-gray-50 from-gray-200">
+    <div class="h-full  bg-linear-to-br to-rose-500 from-rose-300  transition-all" style="width: {audio.progress}%;"></div>
   </div>
   <div
-    class="bg-linear-to-bl from-red-50/20 to-gray-100/80 backdrop-blur flex px-8 py-4 gap-4 items-center"
+    class="bg-linear-to-bl from-red-50/50 to-gray-100 backdrop-blur flex px-8 py-4 gap-4 items-center"
   >
     {#if tracksState.current}
       <div class="w-14 h-14">
@@ -87,6 +88,8 @@
         bind:this={audio.htmlTag}
         // autoplay
         // controls
+        onpause={() => audio.isPlaying = false}
+        onplay={() => audio.isPlaying = true}
         onended={nextTrack}
       ></audio>
       <button onclick={handlerPlay} class="cursor-pointer">
