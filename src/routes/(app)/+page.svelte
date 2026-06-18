@@ -16,7 +16,7 @@
     {#await resAlbums}
       Awaiting
     {:then resAlbums}
-      <div class="flex flex-wrap px-8 gap-4">
+      <div class="flex flex-wrap p-8 gap-4">
         {#each resAlbums.data.albums as album}
           <AlbumItem {album} />
         {/each}

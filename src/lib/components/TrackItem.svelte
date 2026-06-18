@@ -5,6 +5,7 @@
 
   const handlerClick = () => {
     tracksState.current = track
+    localStorage.setItem('currentTime', 0)
   };
 
   const isCurrent = $derived(tracksState.current && tracksState.current.id == track.id) 
