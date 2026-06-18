@@ -36,6 +36,7 @@
     const nextTrack = tracksState.list[index + 1];
 
     tracksState.current = nextTrack ?? tracksState.list[0];
+    localStorage.setItem('currentTime', 0)
   };
 
   $effect(() => {
