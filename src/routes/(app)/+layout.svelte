@@ -9,14 +9,12 @@
     <div>
         <Navbar />
         <div>
-            <hr
-                class=" bg-linear-to-r h-[1px] border-0 from-gray-100 to-gray-300"
-            />
+            <hr/>
         </div>
     </div>
-    <div class=" overflow-y-auto flex-1">
+    <main class="flex flex-col overflow-y-auto flex-1">
         {@render children()}
-    </div>
+    </main>
     <div class="sticky bottom-0 left-0">
         <TrackBar />
     </div>
